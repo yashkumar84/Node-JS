@@ -3,10 +3,12 @@ import express from "express";
 import dotenv from "dotenv";
 import authRoutes from "./shared/routes/route.js";
 import { urlRoutes } from "./features/url/routes/routes.js";
+import { connectDB } from "./config/db.js";
 
 dotenv.config();
 const app = express();
 const port = process.env.PORT;
+connectDB();
 
 app.use(express.json());
 
