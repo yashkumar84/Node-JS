@@ -1,10 +1,12 @@
 import { nanoid } from "nanoid";
 import Url from "../model/Url.js";
+import mongoose from "mongoose";
 
 const urls = new Map();
 
 export const generateShortUrl = async (req, res) => {
   const { url } = req.body;
+  const { email } = req.user;
   if (!url) {
     return res.status(400).json({
       message: "URL is Required",
@@ -16,6 +18,7 @@ export const generateShortUrl = async (req, res) => {
   const urlObject = new Url({
     shortCode: shortId,
     longUrl: url,
+    email: email,
   });
 
   await urlObject.save();
@@ -36,4 +39,13 @@ export const redirectController = async (req, res) => {
   }
 
   return res.redirect(originalUrl);
+};
+
+export const getAllRoutes = async (req, res) => {
+  const { email, user_id } = req.user;
+  const urls = await Url.find({ email: email });
+  res.status(200).json({
+    msg: "Urls Founded ",
+    urls: urls,
+  });
 };
