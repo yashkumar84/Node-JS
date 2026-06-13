@@ -33,11 +33,14 @@ export const registerService = async (req, res) => {
 
   await newUser.save();
 
-  return {
-    user_id: userId,
-    name: body.name,
-    email: body.email,
-  };
+  return res.status(201).json({
+    msg: "Registered SuccessFully",
+    user: {
+      user_id: userId,
+      name: body.name,
+      email: body.email,
+    },
+  });
 };
 
 export const loginService = async (req, res) => {

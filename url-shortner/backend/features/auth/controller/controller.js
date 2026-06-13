@@ -5,16 +5,9 @@ import jwt from "jsonwebtoken";
 import { loginService, registerService } from "../service/service.js";
 
 export const registerController = async (req, res) => {
+  console.log("Request Success", req.body);
   const body = req.body;
   const { userId } = await registerService(req, res);
-  res.status(201).json({
-    msg: "Registered SuccessFully",
-    user: {
-      user_id: userId,
-      name: body.name,
-      email: body.email,
-    },
-  });
 };
 
 export const loginController = async (req, res) => {

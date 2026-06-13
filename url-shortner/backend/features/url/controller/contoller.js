@@ -5,9 +5,9 @@ import mongoose from "mongoose";
 const urls = new Map();
 
 export const generateShortUrl = async (req, res) => {
-  const { url } = req.body;
+  const { longUrl } = req.body;
   const { email } = req.user;
-  if (!url) {
+  if (!longUrl) {
     return res.status(400).json({
       message: "URL is Required",
     });
@@ -17,7 +17,7 @@ export const generateShortUrl = async (req, res) => {
   // urls.set(shortId, url);
   const urlObject = new Url({
     shortCode: shortId,
-    longUrl: url,
+    longUrl: longUrl,
     email: email,
   });
 
