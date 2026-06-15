@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form"
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 export default function Register() {
@@ -12,7 +13,10 @@ export default function Register() {
     console.log(response);
     if(response.status == 201){
         console.log("Inside");
+        toast("Register Successfull");
         return navigate("/login");
+    }else{
+      toast("Error in Register");
     }
 }
 

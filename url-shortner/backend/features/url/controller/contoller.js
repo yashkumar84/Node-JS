@@ -41,9 +41,10 @@ export const redirectController = async (req, res) => {
   return res.redirect(originalUrl);
 };
 
-export const getAllRoutes = async (req, res) => {
+export const getAllURL = async (req, res) => {
   const { email, user_id } = req.user;
   const urls = await Url.find({ email: email });
+  console.log(urls);
   res.status(200).json({
     msg: "Urls Founded ",
     urls: urls,

@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 export default function Login() {
@@ -13,7 +14,10 @@ export default function Login() {
     const response = await axios.post("http://localhost:1234/api/auth/login" , data);
     if(response.status == 201){
         localStorage.setItem("token" , response.data.token);
+        toast("Login Successfull");
         navigate("/shorten");
+    }else{
+      toast("Error While Loggin ");
     }
 }
 
